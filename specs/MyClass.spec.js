@@ -10,7 +10,7 @@
 // })
 
 
-
+var sinon = require('sinon')
 
 
 var MyClass = require('../src/MyClass.js');
@@ -18,15 +18,31 @@ var myObj = new MyClass();
 var chai = require('chai')
 var expect = chai.expect;
 
-
-describe('test', () => {
-    it('test the add func', () => {
-        expect(myObj.add(14, 25)).to.be.equal(39)
+describe('parent1', function () {
+    describe('test', () => {
+        it('test the add func', () => {
+            expect(myObj.add(14, 25)).to.be.equal(39)
+        })
+    })
+    
+    describe('multiplyTest', () => {
+        it('test the multiply func', () => {
+            expect(myObj.multiply(5, 4)).to.be.equal(20)
+        })
     })
 })
 
-describe('multiplyTest', () => {
-    it('test the multiply func', () => {
-        expect(myObj.multiply(5, 4)).to.be.equal(20)
-    })
+describe('parent2', function () {
+    it('testing the spy method', function () {
+        var spy = sinon.spy(myObj, 'multiply');
+        var arg1 = 10;
+        var arg2 = 20;
+
+        myObj.callAnotherFn(arg1, arg2);
+        sinon.assert.calledOnce(spy);
+        expect(spy.calledOnce).to.be.true
+        // expect(spy.calledWith(10, 20)).to.be.true;
 })
+})
+
+

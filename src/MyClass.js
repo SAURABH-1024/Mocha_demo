@@ -15,6 +15,12 @@ class MyClass {
         return result;
     }
 
+
+    callAnotherFn(arg1, arg2) {
+        var result = this.multiply(arg1 * arg2);
+        return result;
+    }
+
 }
 
 module.exports = MyClass;
